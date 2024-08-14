@@ -13,10 +13,6 @@ This file defines basic operations on the the sum type `α ⊕ β`.
 
 ## Main declarations
 
-* `Sum.isLeft`: Returns whether `x : α ⊕ β` comes from the left component or not.
-* `Sum.isRight`: Returns whether `x : α ⊕ β` comes from the right component or not.
-* `Sum.getLeft`: Retrieves the left content of a `x : α ⊕ β` that is known to come from the left.
-* `Sum.getRight`: Retrieves the right content of `x : α ⊕ β` that is known to come from the right.
 * `Sum.getLeft?`: Retrieves the left content of `x : α ⊕ β` as an option type or returns `none`
   if it's coming from the right.
 * `Sum.getRight?`: Retrieves the right content of `x : α ⊕ β` as an option type or returns `none`
@@ -44,24 +40,6 @@ deriving instance DecidableEq for Sum
 deriving instance BEq for Sum
 
 section get
-
-/-- Check if a sum is `inl`. -/
-def isLeft : α ⊕ β → Bool
-  | inl _ => true
-  | inr _ => false
-
-/-- Check if a sum is `inr`. -/
-def isRight : α ⊕ β → Bool
-  | inl _ => false
-  | inr _ => true
-
-/-- Retrieve the contents from a sum known to be `inl`.-/
-def getLeft : (ab : α ⊕ β) → ab.isLeft → α
-  | inl a, _ => a
-
-/-- Retrieve the contents from a sum known to be `inr`.-/
-def getRight : (ab : α ⊕ β) → ab.isRight → β
-  | inr b, _ => b
 
 @[simp] theorem isLeft_inl : (inl x : α ⊕ β).isLeft = true := rfl
 @[simp] theorem isLeft_inr : (inr x : α ⊕ β).isLeft = false := rfl
