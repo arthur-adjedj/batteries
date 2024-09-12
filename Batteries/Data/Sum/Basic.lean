@@ -22,7 +22,6 @@ This file defines basic operations on the the sum type `α ⊕ β`.
 * `Sum.getRight?`: Retrieves the right content of `x : α ⊕ β` as an option type or returns `none`
   if it's coming from the left.
 * `Sum.map`: Maps `α ⊕ β` to `γ ⊕ δ` component-wise.
-* `Sum.elim`: Nondependent eliminator/induction principle for `α ⊕ β`.
 * `Sum.swap`: Maps `α ⊕ β` to `β ⊕ α` by swapping components.
 * `Sum.LiftRel`: The disjoint union of two relations.
 * `Sum.Lex`: Lexicographic order on `α ⊕ β` induced by a relation on `α` and a relation on `β`.
@@ -78,9 +77,6 @@ def getRight : (ab : α ⊕ β) → ab.isRight → β
 
 end get
 
-/-- Define a function on `α ⊕ β` by giving separate definitions on `α` and `β`. -/
-protected def elim {α β γ} (f : α → γ) (g : β → γ) : α ⊕ β → γ :=
-  fun x => Sum.casesOn x f g
 
 @[simp] theorem elim_inl (f : α → γ) (g : β → γ) (x : α) :
     Sum.elim f g (inl x) = f x := rfl
