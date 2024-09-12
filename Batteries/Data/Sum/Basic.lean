@@ -77,13 +77,6 @@ def getRight : (ab : α ⊕ β) → ab.isRight → β
 
 end get
 
-
-@[simp] theorem elim_inl (f : α → γ) (g : β → γ) (x : α) :
-    Sum.elim f g (inl x) = f x := rfl
-
-@[simp] theorem elim_inr (f : α → γ) (g : β → γ) (x : β) :
-    Sum.elim f g (inr x) = g x := rfl
-
 /-- Map `α ⊕ β` to `α' ⊕ β'` sending `α` to `α'` and `β` to `β'`. -/
 protected def map (f : α → α') (g : β → β') : α ⊕ β → α' ⊕ β' :=
   Sum.elim (inl ∘ f) (inr ∘ g)
